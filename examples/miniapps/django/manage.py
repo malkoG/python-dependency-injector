@@ -4,6 +4,7 @@ import os
 import sys
 
 
+# [TODO] main
 def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "githubnavigator.settings")
     try:

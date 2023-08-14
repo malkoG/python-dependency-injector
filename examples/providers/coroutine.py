@@ -5,11 +5,13 @@ import asyncio
 from dependency_injector import containers, providers
 
 
+# [TODO] coroutine
 async def coroutine(arg1, arg2):
     await asyncio.sleep(0.1)
     return arg1, arg2
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     coroutine_provider = providers.Coroutine(coroutine, arg1=1, arg2=2)

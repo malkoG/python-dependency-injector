@@ -5,6 +5,7 @@ from dependency_injector import containers, providers
 from . import giphy, services
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     wiring_config = containers.WiringConfiguration(modules=[".handlers"])

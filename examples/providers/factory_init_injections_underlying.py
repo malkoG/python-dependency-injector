@@ -3,26 +3,35 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Regularizer
 class Regularizer:
+    # [TODO] Regularizer > __init__
     def __init__(self, alpha: float) -> None:
         self.alpha = alpha
 
 
+# [TODO] Loss
 class Loss:
+    # [TODO] Loss > __init__
     def __init__(self, regularizer: Regularizer) -> None:
         self.regularizer = regularizer
 
 
+# [TODO] ClassificationTask
 class ClassificationTask:
+    # [TODO] ClassificationTask > __init__
     def __init__(self, loss: Loss) -> None:
         self.loss = loss
 
 
+# [TODO] Algorithm
 class Algorithm:
+    # [TODO] Algorithm > __init__
     def __init__(self, task: ClassificationTask) -> None:
         self.task = task
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     algorithm_factory = providers.Factory(

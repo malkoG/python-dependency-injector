@@ -8,10 +8,12 @@ from typing import List
 from dependency_injector import containers, providers
 
 
+# [TODO] AbstractCacheClient
 class AbstractCacheClient(metaclass=abc.ABCMeta):
     ...
 
 
+# [TODO] RedisCacheClient
 @dataclasses.dataclass
 class RedisCacheClient(AbstractCacheClient):
     host: str
@@ -19,6 +21,7 @@ class RedisCacheClient(AbstractCacheClient):
     db: int
 
 
+# [TODO] MemcachedCacheClient
 @dataclasses.dataclass
 class MemcachedCacheClient(AbstractCacheClient):
     hosts: List[str]
@@ -26,11 +29,13 @@ class MemcachedCacheClient(AbstractCacheClient):
     prefix: str
 
 
+# [TODO] Service
 @dataclasses.dataclass
 class Service:
     cache: AbstractCacheClient
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     cache_client_factory = providers.AbstractFactory(AbstractCacheClient)

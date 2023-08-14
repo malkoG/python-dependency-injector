@@ -13,8 +13,10 @@ logger = logging.getLogger(__name__)
 Base = declarative_base()
 
 
+# [TODO] Database
 class Database:
 
+    # [TODO] Database > __init__
     def __init__(self, db_url: str) -> None:
         self._engine = create_engine(db_url, echo=True)
         self._session_factory = orm.scoped_session(
@@ -25,9 +27,11 @@ class Database:
             ),
         )
 
+    # [TODO] Database > create_database
     def create_database(self) -> None:
         Base.metadata.create_all(self._engine)
 
+    # [TODO] Database > session
     @contextmanager
     def session(self) -> Callable[..., AbstractContextManager[Session]]:
         session: Session = self._session_factory()

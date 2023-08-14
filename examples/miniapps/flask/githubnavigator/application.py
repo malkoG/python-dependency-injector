@@ -7,6 +7,7 @@ from .containers import Container
 from . import views
 
 
+# [TODO] create_app
 def create_app() -> Flask:
     container = Container()
     container.config.github.auth_token.from_env("GITHUB_TOKEN")

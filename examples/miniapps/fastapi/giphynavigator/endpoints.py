@@ -10,10 +10,12 @@ from .services import SearchService
 from .containers import Container
 
 
+# [TODO] Gif
 class Gif(BaseModel):
     url: str
 
 
+# [TODO] Response
 class Response(BaseModel):
     query: str
     limit: int
@@ -23,6 +25,7 @@ class Response(BaseModel):
 router = APIRouter()
 
 
+# [TODO] index
 @router.get("/", response_model=Response)
 @inject
 async def index(

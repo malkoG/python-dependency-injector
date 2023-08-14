@@ -3,14 +3,17 @@
 from aiohttp import ClientSession, ClientTimeout
 
 
+# [TODO] GiphyClient
 class GiphyClient:
 
     API_URL = "https://api.giphy.com/v1"
 
+    # [TODO] GiphyClient > __init__
     def __init__(self, api_key, timeout):
         self._api_key = api_key
         self._timeout = ClientTimeout(timeout)
 
+    # [TODO] GiphyClient > search
     async def search(self, query, limit):
         """Make search API call and return result."""
         url = f"{self.API_URL}/gifs/search"

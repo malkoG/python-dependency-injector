@@ -3,20 +3,25 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] init_database
 def init_database():
     return ...
 
 
+# [TODO] init_cache
 def init_cache():
     return ...
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self, database, cache):
         self.database = database
         self.cache = cache
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()

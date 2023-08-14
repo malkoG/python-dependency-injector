@@ -8,6 +8,7 @@ from .services import UserService, AuthService, PhotoService
 from .containers import Application
 
 
+# [TODO] main
 @inject
 def main(
         email: str,

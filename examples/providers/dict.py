@@ -6,16 +6,19 @@ from typing import Dict
 from dependency_injector import containers, providers
 
 
+# [TODO] Module
 @dataclasses.dataclass
 class Module:
     name: str
 
 
+# [TODO] Dispatcher
 @dataclasses.dataclass
 class Dispatcher:
     modules: Dict[str, Module]
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     dispatcher_factory = providers.Factory(

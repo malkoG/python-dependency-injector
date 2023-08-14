@@ -6,12 +6,14 @@ from unittest import mock
 from dependency_injector import containers, providers
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     database = providers.Singleton(sqlite3.connect, ":memory:")
 
 
 # Overriding ``Container`` with ``OverridingContainer``:
+# [TODO] OverridingContainer
 @containers.override(Container)
 class OverridingContainer(containers.DeclarativeContainer):
 

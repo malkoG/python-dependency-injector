@@ -5,14 +5,17 @@ from dependency_injector import containers, providers
 from .services import ConfigService
 
 
+# [TODO] Core
 class Core(containers.DeclarativeContainer):
     config = providers.Configuration("config")
 
 
+# [TODO] Storage
 class Storage(containers.DeclarativeContainer):
     queue = providers.Singleton(lambda: "Some storage")
 
 
+# [TODO] Adapter
 class Adapter(containers.DeclarativeContainer):
     core = providers.DependenciesContainer(config=providers.Configuration())
     tinydb = providers.Singleton(
@@ -21,6 +24,7 @@ class Adapter(containers.DeclarativeContainer):
     )
 
 
+# [TODO] Repository
 class Repository(containers.DeclarativeContainer):
     adapter = providers.DependenciesContainer()
     storage = providers.DependenciesContainer()
@@ -31,11 +35,13 @@ class Repository(containers.DeclarativeContainer):
     )
 
 
+# [TODO] Service
 class Service(containers.DeclarativeContainer):
     core = providers.DependenciesContainer()
     config = providers.Singleton(ConfigService, core.config.provider)
 
 
+# [TODO] Application
 class Application(containers.DeclarativeContainer):
 
     core = providers.Container(Core)

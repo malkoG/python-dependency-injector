@@ -5,6 +5,7 @@ from dependency_injector import containers, providers
 from . import entities, repositories
 
 
+# [TODO] PhotoContainer
 class PhotoContainer(containers.DeclarativeContainer):
 
     database = providers.Dependency()

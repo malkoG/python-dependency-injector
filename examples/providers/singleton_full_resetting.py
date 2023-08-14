@@ -3,15 +3,19 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Database
 class Database:
     ...
 
 
+# [TODO] UserService
 class UserService:
+    # [TODO] UserService > __init__
     def __init__(self, db: Database):
         self.db = db
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     database = providers.Singleton(Database)

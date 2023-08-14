@@ -5,12 +5,14 @@ import dataclasses
 from dependency_injector import containers, providers
 
 
+# [TODO] Foo
 @dataclasses.dataclass
 class Foo:
     option1: object
     option2: object
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration(default={

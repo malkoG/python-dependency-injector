@@ -5,6 +5,7 @@ from dependency_injector import containers, providers
 from . import repositories, handler, messagebus, commands
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     rating_repository = providers.Singleton(repositories.RatingRepository)

@@ -7,6 +7,7 @@ from .services import SearchService
 from .containers import Container
 
 
+# [TODO] index
 @inject
 def index(
         search_service: SearchService = Provide[Container.search_service],

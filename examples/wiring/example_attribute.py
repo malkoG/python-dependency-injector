@@ -4,10 +4,12 @@ from dependency_injector import containers, providers
 from dependency_injector.wiring import Provide
 
 
+# [TODO] Service
 class Service:
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Factory(Service)
@@ -16,6 +18,7 @@ class Container(containers.DeclarativeContainer):
 service: Service = Provide[Container.service]
 
 
+# [TODO] Main
 class Main:
 
     service: Service = Provide[Container.service]

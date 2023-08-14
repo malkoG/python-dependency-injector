@@ -7,11 +7,14 @@ import passlib.hash
 from dependency_injector import containers, providers
 
 
+# [TODO] UserService
 class UserService:
 
+    # [TODO] UserService > __init__
     def __init__(self, password_hasher: Callable[[str], str]) -> None:
         self._password_hasher = password_hasher
 
+    # [TODO] UserService > create_user
     def create_user(self, name: str, password: str) -> Dict[str, str]:
         hashed_password = self._password_hasher(password)
         return {
@@ -20,6 +23,7 @@ class UserService:
         }
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()

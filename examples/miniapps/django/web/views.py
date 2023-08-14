@@ -10,6 +10,7 @@ from githubnavigator.containers import Container
 from githubnavigator.services import SearchService
 
 
+# [TODO] index
 @inject
 def index(
         request: HttpRequest,

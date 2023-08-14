@@ -3,24 +3,30 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] ConfigReader
 class ConfigReader:
 
+    # [TODO] ConfigReader > __init__
     def __init__(self, path):
         self._path = path
 
+    # [TODO] ConfigReader > read
     def read(self):
         print(f"Parsing {self._path} with {self.__class__.__name__}")
         ...
 
 
+# [TODO] YamlReader
 class YamlReader(ConfigReader):
     ...
 
 
+# [TODO] JsonReader
 class JsonReader(ConfigReader):
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config_readers = providers.Aggregate(

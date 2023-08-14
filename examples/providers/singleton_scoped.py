@@ -4,15 +4,18 @@ from dependency_injector import containers, providers
 from flask import Flask, current_app
 
 
+# [TODO] Service
 class Service:
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service_provider = providers.ThreadLocalSingleton(Service)
 
 
+# [TODO] index_view
 def index_view():
     service_1 = current_app.container.service_provider()
     service_2 = current_app.container.service_provider()
@@ -21,6 +24,7 @@ def index_view():
     return "Hello  World!"
 
 
+# [TODO] teardown_context
 def teardown_context(request):
     current_app.container.service_provider.reset()
     return request

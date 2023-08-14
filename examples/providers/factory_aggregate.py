@@ -6,6 +6,7 @@ import sys
 from dependency_injector import containers, providers
 
 
+# [TODO] Game
 @dataclasses.dataclass
 class Game:
     player1: str
@@ -18,18 +19,22 @@ class Game:
         )
 
 
+# [TODO] Chess
 class Chess(Game):
     ...
 
 
+# [TODO] Checkers
 class Checkers(Game):
     ...
 
 
+# [TODO] Ludo
 class Ludo(Game):
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     game_factory = providers.FactoryAggregate(

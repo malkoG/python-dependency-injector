@@ -3,12 +3,15 @@
 from dependency_injector import containers, providers, errors
 
 
+# [TODO] ApiClient
 class ApiClient:
+    # [TODO] ApiClient > __init__
     def __init__(self, api_key: str, timeout: int):
         self.api_key = api_key
         self.timeout = timeout
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration(strict=True)

@@ -3,22 +3,27 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self, dependency: str):
         self.dependency = dependency
 
 
+# [TODO] Base
 class Base(containers.DeclarativeContainer):
     dependency = providers.Dependency(instance_of=str, default="Default value")
     service = providers.Factory(Service, dependency=dependency)
 
 
+# [TODO] Derived1
 @containers.copy(Base)
 class Derived1(Base):
     dependency = providers.Dependency(instance_of=str, default="Derived 1")
 
 
 # @containers.copy(Base)  # <-- No @copy decorator
+# [TODO] Derived2
 class Derived2(Base):
     dependency = providers.Dependency(instance_of=str, default="Derived 2")
 

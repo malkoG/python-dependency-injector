@@ -6,6 +6,7 @@ from .dispatcher import Dispatcher
 from .containers import Container
 
 
+# [TODO] main
 @inject
 def main(dispatcher: Dispatcher = Provide[Container.dispatcher]) -> None:
     dispatcher.run()

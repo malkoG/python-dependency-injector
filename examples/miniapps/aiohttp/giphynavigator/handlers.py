@@ -7,6 +7,7 @@ from .services import SearchService
 from .containers import Container
 
 
+# [TODO] index
 @inject
 async def index(
         request: web.Request,

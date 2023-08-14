@@ -6,10 +6,12 @@ import queue
 from dependency_injector import containers, providers
 
 
+# [TODO] put_in_queue
 def put_in_queue(example_object, queue_object):
     queue_object.put(example_object)
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     thread_local_object = providers.ThreadLocalSingleton(object)

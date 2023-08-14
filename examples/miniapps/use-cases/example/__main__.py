@@ -5,6 +5,7 @@ import sys
 from .containers import UseCases, Adapters, TestAdapters
 
 
+# [TODO] main
 def main(environment: str, email: str) -> None:
     if environment == "prod":
         adapters = Adapters()

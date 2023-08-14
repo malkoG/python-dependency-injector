@@ -3,14 +3,17 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] UserService
 class UserService:
     ...
 
 
+# [TODO] AuthService
 class AuthService:
     ...
 
 
+# [TODO] populate_container
 def populate_container(container, providers_config):
     for provider_name, provider_info in providers_config.items():
         provided_cls = globals().get(provider_info["class"])

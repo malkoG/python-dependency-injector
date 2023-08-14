@@ -3,19 +3,23 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
     ...
 
 
+# [TODO] ServiceStub
 class ServiceStub:
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Factory(Service)
 
 
+# [TODO] OverridingContainer
 class OverridingContainer(containers.DeclarativeContainer):
 
     service = providers.Factory(ServiceStub)

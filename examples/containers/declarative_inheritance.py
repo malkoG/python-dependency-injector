@@ -3,11 +3,13 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] ContainerA
 class ContainerA(containers.DeclarativeContainer):
 
     provider1 = providers.Factory(object)
 
 
+# [TODO] ContainerB
 class ContainerB(ContainerA):
 
     provider2 = providers.Singleton(object)

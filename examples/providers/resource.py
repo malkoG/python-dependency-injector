@@ -7,12 +7,14 @@ from concurrent.futures import ThreadPoolExecutor
 from dependency_injector import containers, providers
 
 
+# [TODO] init_thread_pool
 def init_thread_pool(max_workers: int):
     thread_pool = ThreadPoolExecutor(max_workers=max_workers)
     yield thread_pool
     thread_pool.shutdown(wait=True)
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()

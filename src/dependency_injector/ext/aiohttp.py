@@ -15,27 +15,33 @@ warnings.warn(
 )
 
 
+# [TODO] Application
 class Application(providers.Singleton):
     """Aiohttp application provider."""
 
 
+# [TODO] Extension
 class Extension(providers.Singleton):
     """Aiohttp extension provider."""
 
 
+# [TODO] Middleware
 class Middleware(providers.DelegatedCallable):
     """Aiohttp middleware provider."""
 
     __middleware_version__ = 1
 
 
+# [TODO] MiddlewareFactory
 class MiddlewareFactory(providers.Factory):
     """Aiohttp middleware factory provider."""
 
 
+# [TODO] View
 class View(providers.Callable):
     """Aiohttp view provider."""
 
+    # [TODO] View > as_view
     def as_view(self):
         """Return aiohttp view function."""
         @functools.wraps(self.provides)
@@ -44,9 +50,11 @@ class View(providers.Callable):
         return _view
 
 
+# [TODO] ClassBasedView
 class ClassBasedView(providers.Factory):
     """Aiohttp class-based view provider."""
 
+    # [TODO] ClassBasedView > as_view
     def as_view(self):
         """Return aiohttp view function."""
         async def _view(request, *args, **kwargs):

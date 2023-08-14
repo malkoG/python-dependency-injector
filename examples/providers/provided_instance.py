@@ -3,19 +3,25 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self):
         self.value = "foo"
         self.values = [self.value]
 
+    # [TODO] Service > get_value
     def get_value(self):
         return self.value
 
+    # [TODO] Service > __getitem__
     def __getitem__(self, item):
         return self.values[item]
 
 
+# [TODO] Client
 class Client:
+    # [TODO] Client > __init__
     def __init__(self, value1, value2, value3, value4):
         self.value1 = value1
         self.value2 = value2
@@ -23,6 +29,7 @@ class Client:
         self.value4 = value4
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Singleton(Service)
