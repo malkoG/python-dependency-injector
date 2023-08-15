@@ -5,15 +5,18 @@ from dependency_injector.wiring import Provide, inject
 from flask import Flask, json
 
 
+# [TODO] Service
 class Service:
     ...
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Factory(Service)
 
 
+# [TODO] index_view
 @inject
 def index_view(service: Service = Provide[Container.service]) -> str:
     return json.dumps({"service_id": id(service)})

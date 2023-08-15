@@ -10,18 +10,21 @@ os.environ["AWS_ACCESS_KEY_ID"] = "KEY"
 os.environ["AWS_SECRET_ACCESS_KEY"] = "SECRET"
 
 
+# [TODO] AwsSettings
 class AwsSettings(BaseSettings):
 
     access_key_id: str = Field(env="aws_access_key_id")
     secret_access_key: str = Field(env="aws_secret_access_key")
 
 
+# [TODO] Settings
 class Settings(BaseSettings):
 
     aws: AwsSettings = AwsSettings()
     optional: str = Field(default="default_value")
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration(pydantic_settings=[Settings()])

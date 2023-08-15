@@ -9,6 +9,7 @@ from dependency_injector import containers, providers
 from . import services
 
 
+# [TODO] Core
 class Core(containers.DeclarativeContainer):
 
     config = providers.Configuration()
@@ -19,6 +20,7 @@ class Core(containers.DeclarativeContainer):
     )
 
 
+# [TODO] Gateways
 class Gateways(containers.DeclarativeContainer):
 
     config = providers.Configuration()
@@ -36,6 +38,7 @@ class Gateways(containers.DeclarativeContainer):
     )
 
 
+# [TODO] Services
 class Services(containers.DeclarativeContainer):
 
     config = providers.Configuration()
@@ -59,6 +62,7 @@ class Services(containers.DeclarativeContainer):
     )
 
 
+# [TODO] Application
 class Application(containers.DeclarativeContainer):
 
     config = providers.Configuration(yaml_files=["config.yml"])

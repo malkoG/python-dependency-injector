@@ -10,6 +10,7 @@ from .repositories import NotFoundError
 router = APIRouter()
 
 
+# [TODO] get_list
 @router.get("/users")
 @inject
 def get_list(
@@ -18,6 +19,7 @@ def get_list(
     return user_service.get_users()
 
 
+# [TODO] get_by_id
 @router.get("/users/{user_id}")
 @inject
 def get_by_id(
@@ -30,6 +32,7 @@ def get_by_id(
         return Response(status_code=status.HTTP_404_NOT_FOUND)
 
 
+# [TODO] add
 @router.post("/users", status_code=status.HTTP_201_CREATED)
 @inject
 def add(
@@ -38,6 +41,7 @@ def add(
     return user_service.create_user()
 
 
+# [TODO] remove
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 @inject
 def remove(
@@ -52,6 +56,7 @@ def remove(
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
+# [TODO] get_status
 @router.get("/status")
 def get_status():
     return {"status": "OK"}

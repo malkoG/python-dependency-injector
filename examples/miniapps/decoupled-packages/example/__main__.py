@@ -8,6 +8,7 @@ from .analytics.services import AggregationService
 from .containers import ApplicationContainer
 
 
+# [TODO] main
 @inject
 def main(
         user_repository: UserRepository = Provide[

@@ -3,15 +3,19 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
 
+    # [TODO] Service > __init__
     def __init__(self, value):
         self.value = value
 
+    # [TODO] Service > get_value
     def get_value(self):
         return self.value
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Singleton(Service, value=42)

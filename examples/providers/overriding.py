@@ -6,19 +6,23 @@ import unittest.mock
 from dependency_injector import containers, providers
 
 
+# [TODO] ApiClient
 class ApiClient:
     ...
 
 
+# [TODO] ApiClientStub
 class ApiClientStub(ApiClient):
     ...
 
 
+# [TODO] Service
 @dataclasses.dataclass
 class Service:
     api_client: ApiClient
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     api_client_factory = providers.Factory(ApiClient)

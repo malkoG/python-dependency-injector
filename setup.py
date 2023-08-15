@@ -7,6 +7,7 @@ import sys
 from setuptools import setup, Extension
 
 
+# [TODO] _open
 def _open(filename):
     if sys.version_info[0] == 2:
         return open(filename)

@@ -10,6 +10,7 @@ from githubnavigator.containers import Container
 blueprint = Blueprint("example", __name__, template_folder="templates/")
 
 
+# [TODO] index
 @blueprint.route("/")
 @inject
 def index(

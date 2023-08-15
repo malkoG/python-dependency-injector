@@ -5,21 +5,25 @@ from dependency_injector.wiring import Closing, Provide, inject
 from flask import Flask, current_app
 
 
+# [TODO] Service
 class Service:
     ...
 
 
+# [TODO] init_service
 def init_service() -> Service:
     print("Init service")
     yield Service()
     print("Shutdown service")
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     service = providers.Resource(init_service)
 
 
+# [TODO] index_view
 @inject
 def index_view(service: Service = Closing[Provide[Container.service]]):
     assert service is current_app.container.service()

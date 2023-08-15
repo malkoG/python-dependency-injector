@@ -6,16 +6,19 @@ from typing import List
 from dependency_injector import containers, providers
 
 
+# [TODO] Module
 @dataclasses.dataclass
 class Module:
     name: str
 
 
+# [TODO] Dispatcher
 @dataclasses.dataclass
 class Dispatcher:
     modules: List[Module]
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     dispatcher_factory = providers.Factory(

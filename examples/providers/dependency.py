@@ -6,23 +6,28 @@ import dataclasses
 from dependency_injector import containers, providers
 
 
+# [TODO] DbAdapter
 class DbAdapter(metaclass=abc.ABCMeta):
     ...
 
 
+# [TODO] SqliteDbAdapter
 class SqliteDbAdapter(DbAdapter):
     ...
 
 
+# [TODO] PostgresDbAdapter
 class PostgresDbAdapter(DbAdapter):
     ...
 
 
+# [TODO] UserService
 @dataclasses.dataclass
 class UserService:
     database: DbAdapter
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     database = providers.Dependency(instance_of=DbAdapter)

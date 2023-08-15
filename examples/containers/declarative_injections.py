@@ -5,17 +5,22 @@ import sqlite3
 from dependency_injector import containers, providers
 
 
+# [TODO] UserService
 class UserService:
+    # [TODO] UserService > __init__
     def __init__(self, db: sqlite3.Connection):
         self.db = db
 
 
+# [TODO] AuthService
 class AuthService:
+    # [TODO] AuthService > __init__
     def __init__(self, db: sqlite3.Connection, user_service: UserService):
         self.db = db
         self.user_service = user_service
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     database = providers.Singleton(sqlite3.connect, ":memory:")

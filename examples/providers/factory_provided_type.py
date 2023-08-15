@@ -3,20 +3,24 @@
 from dependency_injector import containers, providers, errors
 
 
+# [TODO] BaseService
 class BaseService:
     ...
 
 
+# [TODO] SomeService
 class SomeService(BaseService):
     ...
 
 
+# [TODO] ServiceProvider
 class ServiceProvider(providers.Factory):
 
     provided_type = BaseService
 
 
 # Creating service provider with a correct provided type:
+# [TODO] Services
 class Services(containers.DeclarativeContainer):
 
     some_service_provider = ServiceProvider(SomeService)

@@ -5,6 +5,7 @@ from dependency_injector import containers, providers
 from . import services
 
 
+# [TODO] AnalyticsContainer
 class AnalyticsContainer(containers.DeclarativeContainer):
 
     user_repository = providers.Dependency()

@@ -7,6 +7,7 @@ from .repositories import UserRepository
 from .services import UserService
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     wiring_config = containers.WiringConfiguration(modules=[".endpoints"])

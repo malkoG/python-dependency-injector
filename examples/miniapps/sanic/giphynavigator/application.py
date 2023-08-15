@@ -6,6 +6,7 @@ from .containers import Container
 from . import handlers
 
 
+# [TODO] create_app
 def create_app() -> Sanic:
     """Create and return Sanic application."""
     container = Container()

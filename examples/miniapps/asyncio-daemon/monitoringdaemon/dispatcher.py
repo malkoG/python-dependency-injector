@@ -9,17 +9,21 @@ from typing import List
 from .monitors import Monitor
 
 
+# [TODO] Dispatcher
 class Dispatcher:
 
+    # [TODO] Dispatcher > __init__
     def __init__(self, monitors: List[Monitor]) -> None:
         self._monitors = monitors
         self._monitor_tasks: List[asyncio.Task] = []
         self._logger = logging.getLogger(self.__class__.__name__)
         self._stopping = False
 
+    # [TODO] Dispatcher > run
     def run(self) -> None:
         asyncio.run(self.start())
 
+    # [TODO] Dispatcher > start
     async def start(self) -> None:
         self._logger.info("Starting up")
 
@@ -35,6 +39,7 @@ class Dispatcher:
 
         self.stop()
 
+    # [TODO] Dispatcher > stop
     def stop(self) -> None:
         if self._stopping:
             return
@@ -47,6 +52,7 @@ class Dispatcher:
         self._monitor_tasks.clear()
         self._logger.info("Shutdown finished successfully")
 
+    # [TODO] Dispatcher > _run_monitor
     @staticmethod
     async def _run_monitor(monitor: Monitor) -> None:
         def _until_next(last: float) -> float:

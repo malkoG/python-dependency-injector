@@ -1,6 +1,7 @@
 """Dependency injector errors."""
 
 
+# [TODO] Error
 class Error(Exception):
     """Base error.
 
@@ -8,5 +9,6 @@ class Error(Exception):
     """
 
 
+# [TODO] NoSuchProviderError
 class NoSuchProviderError(Error, AttributeError):
     """Error that is raised when provider lookup is failed."""

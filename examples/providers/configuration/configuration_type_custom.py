@@ -6,11 +6,14 @@ import decimal
 from dependency_injector import containers, providers
 
 
+# [TODO] Calculator
 class Calculator:
+    # [TODO] Calculator > __init__
     def __init__(self, pi: decimal.Decimal):
         self.pi = pi
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()

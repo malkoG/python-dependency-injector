@@ -3,20 +3,26 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self, name: str):
         self.name = name
 
 
+# [TODO] ServiceDispatcher
 class ServiceDispatcher:
+    # [TODO] ServiceDispatcher > __init__
     def __init__(self, container: containers.Container):
         self.container = container
 
+    # [TODO] ServiceDispatcher > get_services
     def get_services(self):
         for provider in self.container.traverse(types=[providers.Factory]):
             yield provider()
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     __self__ = providers.Self()

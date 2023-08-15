@@ -6,35 +6,43 @@ from typing import Dict
 from dependency_injector import containers, providers
 
 
+# [TODO] Command
 class Command:
     ...
 
 
+# [TODO] CommandA
 class CommandA(Command):
     ...
 
 
+# [TODO] CommandB
 class CommandB(Command):
     ...
 
 
+# [TODO] Handler
 class Handler:
     ...
 
 
+# [TODO] HandlerA
 class HandlerA(Handler):
     ...
 
 
+# [TODO] HandlerB
 class HandlerB(Handler):
     ...
 
 
+# [TODO] Dispatcher
 @dataclasses.dataclass
 class Dispatcher:
     command_handlers: Dict[Command, Handler]
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     dispatcher_factory = providers.Factory(

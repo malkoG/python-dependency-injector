@@ -17,6 +17,7 @@ CSV_FILE = DIR / "movies.csv"
 SQLITE_FILE = DIR / "movies.db"
 
 
+# [TODO] create_csv
 def create_csv(movies_data, path):
     with open(path, "w") as opened_file:
         writer = csv.writer(opened_file)
@@ -24,6 +25,7 @@ def create_csv(movies_data, path):
             writer.writerow(row)
 
 
+# [TODO] create_sqlite
 def create_sqlite(movies_data, path):
     with sqlite3.connect(path) as db:
         db.execute(
@@ -34,6 +36,7 @@ def create_sqlite(movies_data, path):
         db.executemany("INSERT INTO movies VALUES (?,?,?)", movies_data)
 
 
+# [TODO] main
 def main():
     create_csv(SAMPLE_DATA, CSV_FILE)
     create_sqlite(SAMPLE_DATA, SQLITE_FILE)

@@ -4,12 +4,15 @@ import boto3.session
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self, s3_client, sqs_client):
         self.s3_client = s3_client
         self.sqs_client = sqs_client
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()
@@ -44,6 +47,7 @@ class Container(containers.DeclarativeContainer):
     )
 
 
+# [TODO] main
 def main():
     container = Container()
     container.config.aws_access_key_id.from_env("AWS_ACCESS_KEY_ID")

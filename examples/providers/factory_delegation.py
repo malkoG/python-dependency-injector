@@ -5,15 +5,20 @@ from typing import Callable, List
 from dependency_injector import containers, providers
 
 
+# [TODO] User
 class User:
+    # [TODO] User > __init__
     def __init__(self, uid: int) -> None:
         self.uid = uid
 
 
+# [TODO] UserRepository
 class UserRepository:
+    # [TODO] UserRepository > __init__
     def __init__(self, user_factory: Callable[..., User]) -> None:
         self.user_factory = user_factory
 
+    # [TODO] UserRepository > get_all
     def get_all(self) -> List[User]:
         return [
             self.user_factory(**user_data)
@@ -21,6 +26,7 @@ class UserRepository:
         ]
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     user_factory = providers.Factory(User)

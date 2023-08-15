@@ -11,21 +11,26 @@ ContainerSchema = Dict[Any, Any]
 ProviderSchema = Dict[Any, Any]
 
 
+# [TODO] SchemaProcessorV1
 class SchemaProcessorV1:
 
+    # [TODO] SchemaProcessorV1 > __init__
     def __init__(self, schema: ContainerSchema) -> None:
         self._schema = schema
         self._container = containers.DynamicContainer()
 
+    # [TODO] SchemaProcessorV1 > process
     def process(self):
         """Process schema."""
         self._create_providers(self._schema["container"])
         self._setup_injections(self._schema["container"])
 
+    # [TODO] SchemaProcessorV1 > get_providers
     def get_providers(self):
         """Return providers."""
         return self._container.providers
 
+    # [TODO] SchemaProcessorV1 > _create_providers
     def _create_providers(
             self,
             provider_schema: ProviderSchema,
@@ -56,6 +61,7 @@ class SchemaProcessorV1:
             if isinstance(provider, providers.Container):
                 self._create_providers(provider_schema=data, container=provider)
 
+    # [TODO] SchemaProcessorV1 > _setup_injections
     def _setup_injections(  # noqa: C901
             self,
             provider_schema: ProviderSchema,
@@ -148,6 +154,7 @@ class SchemaProcessorV1:
             if isinstance(provider, providers.Container):
                 self._setup_injections(provider_schema=data, container=provider)
 
+    # [TODO] SchemaProcessorV1 > _resolve_provider
     def _resolve_provider(self, name: str) -> Optional[providers.Provider]:
         segments = name.split(".")
         try:
@@ -174,6 +181,7 @@ class SchemaProcessorV1:
         return provider
 
 
+# [TODO] build_schema
 def build_schema(schema: ContainerSchema) -> Dict[str, providers.Provider]:
     """Build provider schema."""
     schema_processor = SchemaProcessorV1(schema)
@@ -181,6 +189,7 @@ def build_schema(schema: ContainerSchema) -> Dict[str, providers.Provider]:
     return schema_processor.get_providers()
 
 
+# [TODO] _get_provider_cls
 def _get_provider_cls(provider_cls_name: str) -> Type[providers.Provider]:
     std_provider_type = _fetch_provider_cls_from_std(provider_cls_name)
     if std_provider_type:
@@ -193,10 +202,12 @@ def _get_provider_cls(provider_cls_name: str) -> Type[providers.Provider]:
     raise SchemaError(f"Undefined provider class \"{provider_cls_name}\"")
 
 
+# [TODO] _fetch_provider_cls_from_std
 def _fetch_provider_cls_from_std(provider_cls_name: str) -> Optional[Type[providers.Provider]]:
     return getattr(providers, provider_cls_name, None)
 
 
+# [TODO] _import_provider_cls
 def _import_provider_cls(provider_cls_name: str) -> Optional[Type[providers.Provider]]:
     try:
         cls = _import_string(provider_cls_name)
@@ -210,6 +221,7 @@ def _import_provider_cls(provider_cls_name: str) -> Optional[Type[providers.Prov
         return cls
 
 
+# [TODO] _import_string
 def _import_string(string_name: str) -> Optional[object]:
     segments = string_name.split(".")
 
@@ -227,5 +239,6 @@ def _import_string(string_name: str) -> Optional[object]:
     return getattr(module, member, None)
 
 
+# [TODO] SchemaError
 class SchemaError(Exception):
     """Schema-related error."""

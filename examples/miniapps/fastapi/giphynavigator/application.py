@@ -6,6 +6,7 @@ from .containers import Container
 from . import endpoints
 
 
+# [TODO] create_app
 def create_app() -> FastAPI:
     container = Container()
     container.config.giphy.api_key.from_env("GIPHY_API_KEY")

@@ -10,6 +10,7 @@ from .photo.containers import PhotoContainer
 from .analytics.containers import AnalyticsContainer
 
 
+# [TODO] ApplicationContainer
 class ApplicationContainer(containers.DeclarativeContainer):
 
     config = providers.Configuration(ini_files=["config.ini"])

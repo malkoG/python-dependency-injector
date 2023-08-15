@@ -6,6 +6,7 @@ from dependency_injector.wiring import Provide, inject
 from after import ApiClient, Service
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     config = providers.Configuration()
@@ -22,6 +23,7 @@ class Container(containers.DeclarativeContainer):
     )
 
 
+# [TODO] main
 @inject
 def main(service: Service = Provide[Container.service]) -> None:
     ...

@@ -6,11 +6,14 @@ from unittest import mock
 from dependency_injector import containers, providers
 
 
+# [TODO] Service
 class Service:
+    # [TODO] Service > __init__
     def __init__(self, db):
         self.db = db
 
 
+# [TODO] SourceContainer
 class SourceContainer(containers.DeclarativeContainer):
 
     database = providers.Singleton(sqlite3.connect, ":memory:")
@@ -18,6 +21,7 @@ class SourceContainer(containers.DeclarativeContainer):
 
 
 # Copy ``SourceContainer`` providers into ``DestinationContainer``:
+# [TODO] DestinationContainer
 @containers.copy(SourceContainer)
 class DestinationContainer(SourceContainer):
 

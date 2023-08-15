@@ -90,36 +90,45 @@ F = TypeVar("F", bound=Callable[..., Any])
 Container = Any
 
 
+# [TODO] PatchedRegistry
 class PatchedRegistry:
 
+    # [TODO] PatchedRegistry > __init__
     def __init__(self) -> None:
         self._callables: Dict[Callable[..., Any], "PatchedCallable"] = {}
         self._attributes: Set[PatchedAttribute] = set()
 
+    # [TODO] PatchedRegistry > register_callable
     def register_callable(self, patched: "PatchedCallable") -> None:
         self._callables[patched.patched] = patched
 
+    # [TODO] PatchedRegistry > get_callables_from_module
     def get_callables_from_module(self, module: ModuleType) -> Iterator[Callable[..., Any]]:
         for patched_callable in self._callables.values():
             if not patched_callable.is_in_module(module):
                 continue
             yield patched_callable.patched
 
+    # [TODO] PatchedRegistry > get_callable
     def get_callable(self, fn: Callable[..., Any]) -> "PatchedCallable":
         return self._callables.get(fn)
 
+    # [TODO] PatchedRegistry > has_callable
     def has_callable(self, fn: Callable[..., Any]) -> bool:
         return fn in self._callables
 
+    # [TODO] PatchedRegistry > register_attribute
     def register_attribute(self, patched: "PatchedAttribute") -> None:
         self._attributes.add(patched)
 
+    # [TODO] PatchedRegistry > get_attributes_from_module
     def get_attributes_from_module(self, module: ModuleType) -> Iterator["PatchedAttribute"]:
         for attribute in self._attributes:
             if not attribute.is_in_module(module):
                 continue
             yield attribute
 
+    # [TODO] PatchedRegistry > clear_module_attributes
     def clear_module_attributes(self, module: ModuleType) -> None:
         for attribute in self._attributes.copy():
             if not attribute.is_in_module(module):
@@ -127,6 +136,7 @@ class PatchedRegistry:
             self._attributes.remove(attribute)
 
 
+# [TODO] PatchedCallable
 class PatchedCallable:
 
     __slots__ = (
@@ -138,6 +148,7 @@ class PatchedCallable:
         "closing",
     )
 
+    # [TODO] PatchedCallable > __init__
     def __init__(
             self,
             patched: Optional[Callable[..., Any]] = None,
@@ -158,22 +169,27 @@ class PatchedCallable:
         self.reference_closing: Dict[Any, Any] = reference_closing.copy()
         self.closing: Dict[Any, Any] = {}
 
+    # [TODO] PatchedCallable > is_in_module
     def is_in_module(self, module: ModuleType) -> bool:
         if self.patched is None:
             return False
         return self.patched.__module__ == module.__name__
 
+    # [TODO] PatchedCallable > add_injection
     def add_injection(self, kwarg: Any, injection: Any) -> None:
         self.injections[kwarg] = injection
 
+    # [TODO] PatchedCallable > add_closing
     def add_closing(self, kwarg: Any, injection: Any) -> None:
         self.closing[kwarg] = injection
 
+    # [TODO] PatchedCallable > unwind_injections
     def unwind_injections(self) -> None:
         self.injections = {}
         self.closing = {}
 
 
+# [TODO] PatchedAttribute
 class PatchedAttribute:
 
     __slots__ = (
@@ -182,11 +198,13 @@ class PatchedAttribute:
         "marker",
     )
 
+    # [TODO] PatchedAttribute > __init__
     def __init__(self, member: Any, name: str, marker: "_Marker") -> None:
         self.member = member
         self.name = name
         self.marker = marker
 
+    # [TODO] PatchedAttribute > module_name
     @property
     def module_name(self) -> str:
         if isinstance(self.member, ModuleType):
@@ -194,14 +212,17 @@ class PatchedAttribute:
         else:
             return self.member.__module__
 
+    # [TODO] PatchedAttribute > is_in_module
     def is_in_module(self, module: ModuleType) -> bool:
         return self.module_name == module.__name__
 
 
+# [TODO] ProvidersMap
 class ProvidersMap:
 
     CONTAINER_STRING_ID = "<container>"
 
+    # [TODO] ProvidersMap > __init__
     def __init__(self, container) -> None:
         self._container = container
         self._map = self._create_providers_map(
@@ -213,6 +234,7 @@ class ProvidersMap:
             ),
         )
 
+    # [TODO] ProvidersMap > resolve_provider
     def resolve_provider(
             self,
             provider: Union[providers.Provider, str],
@@ -236,6 +258,7 @@ class ProvidersMap:
         else:
             return self._resolve_provider(provider)
 
+    # [TODO] ProvidersMap > _resolve_string_id
     def _resolve_string_id(
             self,
             id: str,
@@ -255,6 +278,7 @@ class ProvidersMap:
             provider = modifier.modify(provider, providers_map=self)
         return provider
 
+    # [TODO] ProvidersMap > _resolve_provided_instance
     def _resolve_provided_instance(
             self,
             original: providers.Provider,
@@ -288,6 +312,7 @@ class ProvidersMap:
 
         return new
 
+    # [TODO] ProvidersMap > _resolve_delegate
     def _resolve_delegate(
             self,
             original: providers.Delegate,
@@ -297,6 +322,7 @@ class ProvidersMap:
             provider = provider.provider
         return provider
 
+    # [TODO] ProvidersMap > _resolve_config_option
     def _resolve_config_option(
             self,
             original: providers.ConfigurationOption,
@@ -323,6 +349,7 @@ class ProvidersMap:
 
         return new
 
+    # [TODO] ProvidersMap > _resolve_provider
     def _resolve_provider(
             self,
             original: providers.Provider,
@@ -332,6 +359,7 @@ class ProvidersMap:
         except KeyError:
             return None
 
+    # [TODO] ProvidersMap > _create_providers_map
     @classmethod
     def _create_providers_map(
             cls,
@@ -360,8 +388,10 @@ class ProvidersMap:
         return providers_map
 
 
+# [TODO] InspectFilter
 class InspectFilter:
 
+    # [TODO] InspectFilter > is_excluded
     def is_excluded(self, instance: object) -> bool:
         if self._is_werkzeug_local_proxy(instance):
             return True
@@ -372,18 +402,22 @@ class InspectFilter:
         else:
             return False
 
+    # [TODO] InspectFilter > _is_werkzeug_local_proxy
     def _is_werkzeug_local_proxy(self, instance: object) -> bool:
         return werkzeug and isinstance(instance, werkzeug.local.LocalProxy)
 
+    # [TODO] InspectFilter > _is_starlette_request_cls
     def _is_starlette_request_cls(self, instance: object) -> bool:
         return starlette \
                and isinstance(instance, type) \
                and _safe_is_subclass(instance, starlette.requests.Request)
 
+    # [TODO] InspectFilter > _is_builtin
     def _is_builtin(self, instance: object) -> bool:
         return inspect.isbuiltin(instance)
 
 
+# [TODO] wire
 def wire(  # noqa: C901
         container: Container,
         *,
@@ -426,6 +460,7 @@ def wire(  # noqa: C901
             _bind_injections(patched, providers_map)
 
 
+# [TODO] unwire
 def unwire(  # noqa: C901
         *,
         modules: Optional[Iterable[ModuleType]] = None,
@@ -454,6 +489,7 @@ def unwire(  # noqa: C901
         _patched_registry.clear_module_attributes(module)
 
 
+# [TODO] inject
 def inject(fn: F) -> F:
     """Decorate callable with injecting decorator."""
     reference_injections, reference_closing = _fetch_reference_injections(fn)
@@ -461,6 +497,7 @@ def inject(fn: F) -> F:
     return cast(F, patched)
 
 
+# [TODO] _patch_fn
 def _patch_fn(
         module: ModuleType,
         name: str,
@@ -478,6 +515,7 @@ def _patch_fn(
     setattr(module, name, fn)
 
 
+# [TODO] _patch_method
 def _patch_method(
         cls: Type,
         name: str,
@@ -506,6 +544,7 @@ def _patch_method(
     setattr(cls, name, fn)
 
 
+# [TODO] _unpatch
 def _unpatch(
         module: ModuleType,
         name: str,
@@ -523,6 +562,7 @@ def _unpatch(
     _unbind_injections(fn)
 
 
+# [TODO] _patch_attribute
 def _patch_attribute(
         member: Any,
         name: str,
@@ -544,10 +584,12 @@ def _patch_attribute(
         raise Exception(f"Unknown type of marker {marker}")
 
 
+# [TODO] _unpatch_attribute
 def _unpatch_attribute(patched: PatchedAttribute) -> None:
     setattr(patched.member, patched.name, patched.marker)
 
 
+# [TODO] _fetch_reference_injections
 def _fetch_reference_injections(  # noqa: C901
         fn: Callable[..., Any],
 ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
@@ -593,6 +635,7 @@ def _fetch_reference_injections(  # noqa: C901
     return injections, closing
 
 
+# [TODO] _locate_dependent_closing_args
 def _locate_dependent_closing_args(provider: providers.Provider) -> Dict[str, providers.Provider]:
     if not hasattr(provider, "args"):
         return {}
@@ -609,6 +652,7 @@ def _locate_dependent_closing_args(provider: providers.Provider) -> Dict[str, pr
     return closing_deps
 
 
+# [TODO] _bind_injections
 def _bind_injections(fn: Callable[..., Any], providers_map: ProvidersMap) -> None:
     patched_callable = _patched_registry.get_callable(fn)
     if patched_callable is None:
@@ -635,6 +679,7 @@ def _bind_injections(fn: Callable[..., Any], providers_map: ProvidersMap) -> Non
                 patched_callable.add_closing(key, dep)
 
 
+# [TODO] _unbind_injections
 def _unbind_injections(fn: Callable[..., Any]) -> None:
     patched_callable = _patched_registry.get_callable(fn)
     if patched_callable is None:
@@ -642,6 +687,7 @@ def _unbind_injections(fn: Callable[..., Any]) -> None:
     patched_callable.unwind_injections()
 
 
+# [TODO] _fetch_modules
 def _fetch_modules(package):
     modules = [package]
     if not hasattr(package, "__path__") or not hasattr(package, "__name__"):
@@ -655,14 +701,17 @@ def _fetch_modules(package):
     return modules
 
 
+# [TODO] _is_method
 def _is_method(member) -> bool:
     return inspect.ismethod(member) or inspect.isfunction(member)
 
 
+# [TODO] _is_marker
 def _is_marker(member) -> bool:
     return isinstance(member, _Marker)
 
 
+# [TODO] _get_patched
 def _get_patched(
         fn: F,
         reference_injections: Dict[Any, Any],
@@ -685,20 +734,24 @@ def _get_patched(
     return patched
 
 
+# [TODO] _is_fastapi_depends
 def _is_fastapi_depends(param: Any) -> bool:
     return fastapi and isinstance(param, fastapi.params.Depends)
 
 
+# [TODO] _is_patched
 def _is_patched(fn) -> bool:
     return _patched_registry.has_callable(fn)
 
 
+# [TODO] _is_declarative_container
 def _is_declarative_container(instance: Any) -> bool:
     return (isinstance(instance, type)
             and getattr(instance, "__IS_CONTAINER__", False) is True
             and getattr(instance, "declarative_parent", None) is None)
 
 
+# [TODO] _safe_is_subclass
 def _safe_is_subclass(instance: Any, cls: Type) -> bool:
     try:
         return issubclass(instance, cls)
@@ -706,8 +759,10 @@ def _safe_is_subclass(instance: Any, cls: Type) -> bool:
         return False
 
 
+# [TODO] Modifier
 class Modifier:
 
+    # [TODO] Modifier > modify
     def modify(
             self,
             provider: providers.ConfigurationOption,
@@ -716,11 +771,14 @@ class Modifier:
         ...
 
 
+# [TODO] TypeModifier
 class TypeModifier(Modifier):
 
+    # [TODO] TypeModifier > __init__
     def __init__(self, type_: Type) -> None:
         self.type_ = type_
 
+    # [TODO] TypeModifier > modify
     def modify(
             self,
             provider: providers.ConfigurationOption,
@@ -729,38 +787,47 @@ class TypeModifier(Modifier):
         return provider.as_(self.type_)
 
 
+# [TODO] as_int
 def as_int() -> TypeModifier:
     """Return int type modifier."""
     return TypeModifier(int)
 
 
+# [TODO] as_float
 def as_float() -> TypeModifier:
     """Return float type modifier."""
     return TypeModifier(float)
 
 
+# [TODO] as_
 def as_(type_: Type) -> TypeModifier:
     """Return custom type modifier."""
     return TypeModifier(type_)
 
 
+# [TODO] RequiredModifier
 class RequiredModifier(Modifier):
 
+    # [TODO] RequiredModifier > __init__
     def __init__(self) -> None:
         self.type_modifier = None
 
+    # [TODO] RequiredModifier > as_int
     def as_int(self) -> "RequiredModifier":
         self.type_modifier = TypeModifier(int)
         return self
 
+    # [TODO] RequiredModifier > as_float
     def as_float(self) -> "RequiredModifier":
         self.type_modifier = TypeModifier(float)
         return self
 
+    # [TODO] RequiredModifier > as_
     def as_(self, type_: Type) -> "RequiredModifier":
         self.type_modifier = TypeModifier(type_)
         return self
 
+    # [TODO] RequiredModifier > modify
     def modify(
             self,
             provider: providers.ConfigurationOption,
@@ -772,16 +839,20 @@ class RequiredModifier(Modifier):
         return provider
 
 
+# [TODO] required
 def required() -> RequiredModifier:
     """Return required modifier."""
     return RequiredModifier()
 
 
+# [TODO] InvariantModifier
 class InvariantModifier(Modifier):
 
+    # [TODO] InvariantModifier > __init__
     def __init__(self, id: str) -> None:
         self.id = id
 
+    # [TODO] InvariantModifier > modify
     def modify(
             self,
             provider: providers.ConfigurationOption,
@@ -791,32 +862,39 @@ class InvariantModifier(Modifier):
         return provider[invariant_segment]
 
 
+# [TODO] invariant
 def invariant(id: str) -> InvariantModifier:
     """Return invariant modifier."""
     return InvariantModifier(id)
 
 
+# [TODO] ProvidedInstance
 class ProvidedInstance(Modifier):
 
     TYPE_ATTRIBUTE = "attr"
     TYPE_ITEM = "item"
     TYPE_CALL = "call"
 
+    # [TODO] ProvidedInstance > __init__
     def __init__(self) -> None:
         self.segments = []
 
+    # [TODO] ProvidedInstance > __getattr__
     def __getattr__(self, item):
         self.segments.append((self.TYPE_ATTRIBUTE, item))
         return self
 
+    # [TODO] ProvidedInstance > __getitem__
     def __getitem__(self, item):
         self.segments.append((self.TYPE_ITEM, item))
         return self
 
+    # [TODO] ProvidedInstance > call
     def call(self):
         self.segments.append((self.TYPE_CALL, None))
         return self
 
+    # [TODO] ProvidedInstance > modify
     def modify(
             self,
             provider: providers.Provider,
@@ -833,12 +911,15 @@ class ProvidedInstance(Modifier):
         return provider
 
 
+# [TODO] provided
 def provided() -> ProvidedInstance:
     """Return provided instance modifier."""
     return ProvidedInstance()
 
 
+# [TODO] ClassGetItemMeta
 class ClassGetItemMeta(GenericMeta):
+    # [TODO] ClassGetItemMeta > __getitem__
     def __getitem__(cls, item):
         # Spike for Python 3.6
         if isinstance(item, tuple):
@@ -846,10 +927,12 @@ class ClassGetItemMeta(GenericMeta):
         return cls(item)
 
 
+# [TODO] _Marker
 class _Marker(Generic[T], metaclass=ClassGetItemMeta):
 
     __IS_MARKER__ = True
 
+    # [TODO] _Marker > __init__
     def __init__(
             self,
             provider: Union[providers.Provider, Container, str],
@@ -860,43 +943,52 @@ class _Marker(Generic[T], metaclass=ClassGetItemMeta):
         self.provider = provider
         self.modifier = modifier
 
+    # [TODO] _Marker > __class_getitem__
     def __class_getitem__(cls, item) -> T:
         if isinstance(item, tuple):
             return cls(*item)
         return cls(item)
 
+    # [TODO] _Marker > __call__
     def __call__(self) -> T:
         return self
 
 
+# [TODO] Provide
 class Provide(_Marker):
     ...
 
 
+# [TODO] Provider
 class Provider(_Marker):
     ...
 
 
+# [TODO] Closing
 class Closing(_Marker):
     ...
 
 
+# [TODO] AutoLoader
 class AutoLoader:
     """Auto-wiring module loader.
 
     Automatically wire containers when modules are imported.
     """
 
+    # [TODO] AutoLoader > __init__
     def __init__(self) -> None:
         self.containers = []
         self._path_hook = None
 
+    # [TODO] AutoLoader > register_containers
     def register_containers(self, *containers) -> None:
         self.containers.extend(containers)
 
         if not self.installed:
             self.install()
 
+    # [TODO] AutoLoader > unregister_containers
     def unregister_containers(self, *containers) -> None:
         for container in containers:
             self.containers.remove(container)
@@ -904,14 +996,17 @@ class AutoLoader:
         if not self.containers:
             self.uninstall()
 
+    # [TODO] AutoLoader > wire_module
     def wire_module(self, module) -> None:
         for container in self.containers:
             container.wire(modules=[module])
 
+    # [TODO] AutoLoader > installed
     @property
     def installed(self) -> bool:
         return self._path_hook in sys.path_hooks
 
+    # [TODO] AutoLoader > install
     def install(self) -> None:
         if self.installed:
             return
@@ -943,6 +1038,7 @@ class AutoLoader:
         sys.path_importer_cache.clear()
         importlib.invalidate_caches()
 
+    # [TODO] AutoLoader > uninstall
     def uninstall(self) -> None:
         if not self.installed:
             return
@@ -952,26 +1048,31 @@ class AutoLoader:
         importlib.invalidate_caches()
 
 
+# [TODO] register_loader_containers
 def register_loader_containers(*containers: Container) -> None:
     """Register containers in auto-wiring module loader."""
     _loader.register_containers(*containers)
 
 
+# [TODO] unregister_loader_containers
 def unregister_loader_containers(*containers: Container) -> None:
     """Unregister containers from auto-wiring module loader."""
     _loader.unregister_containers(*containers)
 
 
+# [TODO] install_loader
 def install_loader() -> None:
     """Install auto-wiring module loader hook."""
     _loader.install()
 
 
+# [TODO] uninstall_loader
 def uninstall_loader() -> None:
     """Uninstall auto-wiring module loader hook."""
     _loader.uninstall()
 
 
+# [TODO] is_loader_installed
 def is_loader_installed() -> bool:
     """Check if auto-wiring module loader hook is installed."""
     return _loader.installed
@@ -988,6 +1089,7 @@ from ._cwiring import _async_inject  # noqa
 
 # Wiring uses the following Python wrapper because there is
 # no possibility to compile a first-type citizen coroutine in Cython.
+# [TODO] _get_async_patched
 def _get_async_patched(fn: F, patched: PatchedCallable) -> F:
     @functools.wraps(fn)
     async def _patched(*args, **kwargs):

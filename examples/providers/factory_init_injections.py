@@ -3,16 +3,20 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] Photo
 class Photo:
     ...
 
 
+# [TODO] User
 class User:
+    # [TODO] User > __init__
     def __init__(self, uid: int, main_photo: Photo) -> None:
         self.uid = uid
         self.main_photo = main_photo
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     photo_factory = providers.Factory(Photo)

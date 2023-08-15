@@ -6,6 +6,7 @@ from .containers import Container
 from . import handlers
 
 
+# [TODO] create_app
 def create_app() -> web.Application:
     container = Container()
     container.config.giphy.api_key.from_env("GIPHY_API_KEY")

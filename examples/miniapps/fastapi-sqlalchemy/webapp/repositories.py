@@ -8,15 +8,19 @@ from sqlalchemy.orm import Session
 from .models import User
 
 
+# [TODO] UserRepository
 class UserRepository:
 
+    # [TODO] UserRepository > __init__
     def __init__(self, session_factory: Callable[..., AbstractContextManager[Session]]) -> None:
         self.session_factory = session_factory
 
+    # [TODO] UserRepository > get_all
     def get_all(self) -> Iterator[User]:
         with self.session_factory() as session:
             return session.query(User).all()
 
+    # [TODO] UserRepository > get_by_id
     def get_by_id(self, user_id: int) -> User:
         with self.session_factory() as session:
             user = session.query(User).filter(User.id == user_id).first()
@@ -24,6 +28,7 @@ class UserRepository:
                 raise UserNotFoundError(user_id)
             return user
 
+    # [TODO] UserRepository > add
     def add(self, email: str, password: str, is_active: bool = True) -> User:
         with self.session_factory() as session:
             user = User(email=email, hashed_password=password, is_active=is_active)
@@ -32,6 +37,7 @@ class UserRepository:
             session.refresh(user)
             return user
 
+    # [TODO] UserRepository > delete_by_id
     def delete_by_id(self, user_id: int) -> None:
         with self.session_factory() as session:
             entity: User = session.query(User).filter(User.id == user_id).first()
@@ -41,14 +47,17 @@ class UserRepository:
             session.commit()
 
 
+# [TODO] NotFoundError
 class NotFoundError(Exception):
 
     entity_name: str
 
+    # [TODO] NotFoundError > __init__
     def __init__(self, entity_id):
         super().__init__(f"{self.entity_name} not found, id: {entity_id}")
 
 
+# [TODO] UserNotFoundError
 class UserNotFoundError(NotFoundError):
 
     entity_name: str = "User"

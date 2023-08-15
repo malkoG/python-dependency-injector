@@ -6,6 +6,7 @@ from .listers import MovieLister
 from .containers import Container
 
 
+# [TODO] main
 @inject
 def main(lister: MovieLister = Provide[Container.lister]) -> None:
     print("Francis Lawrence movies:")

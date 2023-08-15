@@ -7,18 +7,23 @@ from typing import Dict, Any
 from .http import HttpClient
 
 
+# [TODO] Monitor
 class Monitor:
 
+    # [TODO] Monitor > __init__
     def __init__(self, check_every: int) -> None:
         self.check_every = check_every
         self.logger = logging.getLogger(self.__class__.__name__)
 
+    # [TODO] Monitor > check
     async def check(self) -> None:
         raise NotImplementedError()
 
 
+# [TODO] HttpMonitor
 class HttpMonitor(Monitor):
 
+    # [TODO] HttpMonitor > __init__
     def __init__(
             self,
             http_client: HttpClient,
@@ -30,6 +35,7 @@ class HttpMonitor(Monitor):
         self._timeout = options.pop("timeout")
         super().__init__(check_every=options.pop("check_every"))
 
+    # [TODO] HttpMonitor > check
     async def check(self) -> None:
         time_start = time.time()
 

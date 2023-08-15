@@ -10,6 +10,7 @@ from .services import Service
 app = FastAPI()
 
 
+# [TODO] index
 @app.api_route("/")
 @inject
 async def index(service: Service = Depends(Provide[Container.service])):

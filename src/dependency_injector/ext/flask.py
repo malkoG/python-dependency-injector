@@ -18,30 +18,37 @@ warnings.warn(
 request = providers.Object(flask_request)
 
 
+# [TODO] Application
 class Application(providers.Singleton):
     """Flask application provider."""
 
 
+# [TODO] Extension
 class Extension(providers.Singleton):
     """Flask extension provider."""
 
 
+# [TODO] View
 class View(providers.Callable):
     """Flask view provider."""
 
+    # [TODO] View > as_view
     def as_view(self):
         """Return Flask view function."""
         return as_view(self)
 
 
+# [TODO] ClassBasedView
 class ClassBasedView(providers.Factory):
     """Flask class-based view provider."""
 
+    # [TODO] ClassBasedView > as_view
     def as_view(self, name):
         """Return Flask view function."""
         return as_view(self, name)
 
 
+# [TODO] as_view
 def as_view(provider, name=None):
     """Transform class-based view provider to view function."""
     if isinstance(provider, providers.Factory):

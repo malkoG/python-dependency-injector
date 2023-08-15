@@ -3,31 +3,39 @@
 from dependency_injector import containers, providers
 
 
+# [TODO] SqlAlchemyDatabaseService
 class SqlAlchemyDatabaseService:
 
+    # [TODO] SqlAlchemyDatabaseService > __init__
     def __init__(self, session, base_class):
         self.session = session
         self.base_class = base_class
 
 
+# [TODO] TokensService
 class TokensService:
 
+    # [TODO] TokensService > __init__
     def __init__(self, id_generator, database):
         self.id_generator = id_generator
         self.database = database
 
 
+# [TODO] Token
 class Token:
     ...
 
 
+# [TODO] UsersService
 class UsersService:
 
+    # [TODO] UsersService > __init__
     def __init__(self, id_generator, database):
         self.id_generator = id_generator
         self.database = database
 
 
+# [TODO] User
 class User:
     ...
 
@@ -37,6 +45,7 @@ session = object()
 id_generator = object()
 
 
+# [TODO] Container
 class Container(containers.DeclarativeContainer):
 
     database_factory = providers.Factory(
